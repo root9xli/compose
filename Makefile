@@ -29,6 +29,9 @@ LD_FLAGS := -s -w \
 
 OUTPUT_DIR ?= ./bin
 
+# Default test flags: run tests in parallel with a timeout
+TEST_FLAGS ?= -v -count=1 -timeout 120s
+
 .PHONY: all
 all: build
 
@@ -47,7 +50,7 @@ build:
 .PHONY: test
 test:
 	@echo "Running unit tests..."
-	$(GO) test $(GOFLAGS) ./... -v -count=1
+	$(GO) test $(GOFLAGS) ./... $(TEST_FLAGS)
 
 ## test-coverage: Run tests with coverage report
 .PHONY: test-coverage
