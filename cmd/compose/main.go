@@ -71,11 +71,14 @@ Run 'docker compose COMMAND --help' for more information on a command.`,
 	}
 
 	// Add persistent flags available to all subcommands
+	// Note: --file supports multiple values but the flag is defined as a single
+	// string here; in practice compose.Options handles comma-separated paths.
 	cmd.PersistentFlags().StringP("file", "f", "", "Compose configuration files")
 	cmd.PersistentFlags().String("project-name", "", "Project name")
 	cmd.PersistentFlags().String("profile", "", "Specify a profile to enable")
 	cmd.PersistentFlags().Bool("dry-run", false, "Execute command in dry run mode")
-	cmd.PersistentFlags().Bool("ansi", true, "Control when to print ANSI control characters")
+	// Default ansi to false so output is cleaner when piped to other tools
+	cmd.PersistentFlags().Bool("ansi", false, "Control when to print ANSI control characters")
 	cmd.PersistentFlags().Bool("no-ansi", false, "Do not print ANSI control characters (DEPRECATED)")
 	_ = cmd.PersistentFlags().MarkHidden("no-ansi")
 
