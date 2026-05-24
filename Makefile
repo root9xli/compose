@@ -30,7 +30,8 @@ LD_FLAGS := -s -w \
 OUTPUT_DIR ?= ./bin
 
 # Default test flags: run tests in parallel with a timeout
-TEST_FLAGS ?= -v -count=1 -timeout 120s
+# Increased timeout to 300s since some integration tests on my machine run slow
+TEST_FLAGS ?= -v -count=1 -timeout 300s
 
 .PHONY: all
 all: build
